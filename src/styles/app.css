@@ -1,0 +1,51 @@
+
+
+.background{
+    width: 100vw;
+    height: 100vh;
+    padding: 20px;
+    background-image: url('/public/images/ctf_laos.png');
+    background-size: cover;
+    overflow: hidden;
+    text-align: center;
+}
+
+.content{
+    max-width: 1600px;
+    margin: auto;
+    position: relative;
+}
+
+header{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    margin-bottom: 80px;
+}
+
+#header-logo{
+    width: 430px;
+    margin-bottom: 20px;
+}
+
+#header-title{
+    font-family: 'Equalize';
+    font-size: 14px;
+    background-color: rgba(228, 11, 66, 0.5);
+    padding: 8px 20px;
+    border: 1px solid #000;
+}
+
+@supports (-webkit-text-stroke: 0.5px black) {
+    #header-title {
+      -webkit-text-stroke: 0.5px black;
+      -webkit-text-fill-color: white;
+    }
+}
+
+main{
+    display: flex;
+    justify-content: center;
+}
