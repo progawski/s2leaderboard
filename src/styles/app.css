@@ -6,7 +6,7 @@
     padding: 20px;
     background-image: url('/public/images/ctf_laos.png');
     background-size: cover;
-    overflow: hidden;
+    /* overflow: hidden; */
     text-align: center;
 }
 

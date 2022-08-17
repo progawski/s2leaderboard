@@ -4,13 +4,15 @@
 
 @font-face {
     font-family: 'Equalize';
-    src: url('/src/fonts/EQUALIZE.TTF');
+    src: url('/src/fonts/EQUALIZE.TTF') format('ttf');
 }
 
 @font-face {
     font-family: 'Bakbak One Regular';
     src: url('/src/fonts/BakbakOneRegular.woff') format('woff');
-    }
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 
 * {
     box-sizing: border-box;
