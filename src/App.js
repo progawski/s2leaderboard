@@ -44,9 +44,9 @@ export default function App() {
                     <h1 id="header-title">RANKED LEADERBOARD</h1>     
                     <RankSelector/>
                 </header>
-                <main>
+                <main>     
                     <PlayerStats/>
-                    <Leaderboard data={data}/>
+                    <Leaderboard data={data} isLoading={loading}/>
                 </main>
                 <footer>
 

@@ -1,29 +1,58 @@
 #leaderboard-container{
     display: flex;
-    justify-content: center;
-    align-items: center;
     border: 1px solid #000;
     background-color: rgba(79, 103, 63, 0.85);
     width: 810px;
+    height: 632px;
     padding: 20px;
 }
 
-#leaderboard-scrollable{
-    overflow-y: scroll;
-    height: 530px;
+#leaderboard {
+    display: block;
     width: 100%;
-}
-
-#leaderboard{
-    width: 100%;
-    border-spacing: 0;
-    margin-right: 20px;
     color: #fff;
-    border-spacing: 0 8px;
-    margin: -8px 0;
+    font-family: 'Bakbak One Regular';
+    font-size: 16px;
+    -webkit-text-stroke: 0.5px black;
+    text-shadow: -0.5px -0.5px 0 #000, 0.5px -0.5px 0 #000, -0.5px 0.5px 0 #000, 0.5px 0.5px 0 #000;
 }
 
-#leaderboard thead{
+#leaderboard-header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    margin-bottom: 20px;
+    padding-right: 16px;
+    background-color: #11201B;
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.5);
+    width: 770px;
+}
+
+.leaderboard-row{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top: 1px solid #567D52;
+    background-color: rgba(39, 57, 37, 0.63);
+    box-shadow: inset 0px 2px 4px 0px rgba(0, 0, 0, 0.5);
+    height: 40px;
+}
+
+
+.name-col{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-basis: 50%;
+}
+
+.rank-col, .w-col, .t-col, .l-col, .sum-col{
+    text-align: center;
+    flex-basis: 10%;
+}
+
+/* #leaderboard thead{
     background-color: #11201B;
     border: 1px solid #000;
     height: 50px;
@@ -32,52 +61,10 @@
     font-size: 16px;
     position: sticky;
     top: 0;
-}
+} */
 
-#leaderboard tbody{
-    font-family: 'Bakbak One Regular';
-    font-size: 16px;
-    -webkit-text-stroke: 0.5px black;
-    text-shadow: -0.5px -0.5px 0 #000, 0.5px -0.5px 0 #000, -0.5px 0.5px 0 #000, 0.5px 0.5px 0 #000;
-}
-
-#leaderboard tr{
-    box-shadow: inset 0px 2px 4px 0px rgba(0, 0, 0, 0.5);
-}
-
-#leaderboard td{
-    border-top: 1px solid #567D52;
-}
-
-.rank-col{
-    min-width: 12%;
-
-}
 
 .rank-img-small{
     height: 28px;
     margin-right: 8px;
-}
-
-.w-col, .t-col, .l-col, .sum-col{
-    width: 10%;
-}
-
-.name-col{
-    text-align: left;
-}
-
-td.name-col{
-    display: flex;
-    align-items: center;
-    height: 40px;
-}
-
-#leaderboard tbody tr{
-    background-color: rgba(39, 57, 37, 0.63);
-    height: 40px;
-}
-
-#scrollbar-container{
-    width: 20px;
 }
