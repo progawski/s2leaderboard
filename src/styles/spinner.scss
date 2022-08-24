@@ -1,0 +1,89 @@
+$spinner-diameter: 50px;
+$disc-diameter: 10px;
+$time: 1s;
+$delay: $time/10;
+
+.spinner {
+    display: block;
+    position: relative;
+    width: $spinner-diameter;
+    height: $spinner-diameter;
+}
+
+.spinner div {
+    position: absolute;
+    width: $disc-diameter;
+    height: $disc-diameter;
+    background-color: rgba(39, 57, 37, 0.63);
+    border-radius: 50%;
+    animation: spinner $time linear infinite;
+}
+
+.spinner div:nth-child(1) {
+    animation-delay: 0;
+    left: $spinner-diameter - $disc-diameter/2;
+    top: ($spinner-diameter - $disc-diameter)/2;
+}
+
+.spinner div:nth-child(2) {
+    animation-delay: $delay;
+    left: $spinner-diameter - $disc-diameter/2 - 5;
+    top: ($spinner-diameter - $disc-diameter)/2 + 15;
+}
+
+.spinner div:nth-child(3) {
+    animation-delay: $delay * 2;
+    left: $spinner-diameter - $disc-diameter/2 - 17;
+    top: ($spinner-diameter - $disc-diameter)/2 + 25;
+}
+
+.spinner div:nth-child(4) {
+    animation-delay: $delay * 3;
+    left: $spinner-diameter - $disc-diameter/2 - 33;
+    top: ($spinner-diameter - $disc-diameter)/2 + 25;
+}
+
+.spinner div:nth-child(5) {
+    animation-delay: $delay * 4;
+    left: $spinner-diameter - $disc-diameter/2 - 45;
+    top: ($spinner-diameter - $disc-diameter)/2 + 15;
+}
+
+.spinner div:nth-child(6) {
+    animation-delay: $delay * 5;
+    left: $spinner-diameter - $disc-diameter/2 - 50;
+    top: ($spinner-diameter - $disc-diameter)/2;
+}
+
+.spinner div:nth-child(7) {
+    animation-delay: $delay * 6;
+    left: $spinner-diameter - $disc-diameter/2 - 45;
+    top: ($spinner-diameter - $disc-diameter)/2 - 15;
+}
+
+.spinner div:nth-child(8) {
+    animation-delay: $delay * 7;
+    left: $spinner-diameter - $disc-diameter/2 - 33;
+    top: ($spinner-diameter - $disc-diameter)/2 - 24;
+}
+
+.spinner div:nth-child(9) {
+    animation-delay: $delay * 8;
+    left: $spinner-diameter - $disc-diameter/2 - 17;
+    top: ($spinner-diameter - $disc-diameter)/2 - 24;
+}
+
+.spinner div:nth-child(10) {
+    animation-delay: $delay * 9;
+    left: $spinner-diameter - $disc-diameter/2 - 5;
+    top: ($spinner-diameter - $disc-diameter)/2 - 15;
+}
+
+@keyframes spinner {
+    0% {
+        background-color: rgb(53, 200, 136);
+    }
+    50%{
+        background-color: rgba(39, 57, 37, 0.63);
+    }
+}

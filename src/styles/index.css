@@ -1,6 +1,7 @@
 @import url('app.css');
 @import url('rankSelector.css');
 @import url('leaderboard.css');
+@import url('spinner.css');
 
 @font-face {
     font-family: 'Equalize';

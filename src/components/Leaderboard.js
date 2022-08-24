@@ -1,6 +1,7 @@
 import react from 'react';
 import { List } from "react-virtualized";
 import LeaderboardRow from './LeaderboardRow';
+import Spinner from './Spinner';
 
 export default function Leaderboard(props) {
 
@@ -18,17 +19,17 @@ export default function Leaderboard(props) {
 
     return(
         <div id='leaderboard-container'>      
-                <div id="leaderboard">
-                    <div id="leaderboard-header">
-                        <div className='rank-col'>RANK</div>
-                        <div className='name-col'>NAME</div>
-                        <div className='w-col'>W</div>
-                        <div className='t-col'>T</div>
-                        <div className='l-col'>L</div>
-                        <div className='sum-col'>SUM</div>
-                    </div>
-                    
-                    {props.isLoading? 'Loading...' :                 
+            <div id="leaderboard">
+                <div id="leaderboard-header">
+                    <div className='rank-col'>RANK</div>
+                    <div className='name-col'>NAME</div>
+                    <div className='w-col'>W</div>
+                    <div className='t-col'>T</div>
+                    <div className='l-col'>L</div>
+                    <div className='sum-col'>SUM</div>
+                </div>
+                <div id="leaderboard-content">
+                    {props.isLoading? <Spinner /> :                 
                         <List
                             width = {770}
                             height = {472}
@@ -46,8 +47,9 @@ export default function Leaderboard(props) {
                                 );
                             }}
                         />
-                    }           
-                </div>    
+                    }     
+                </div>                 
+            </div>   
         </div>
     )
 }
