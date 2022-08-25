@@ -31,6 +31,10 @@
     width: 770px;
 }
 
+#leaderboard-header div:hover{
+    cursor: pointer;
+}
+
 #leaderboard-content{
     display: flex;
     justify-content: center;

@@ -1,4 +1,4 @@
-import react, {useState, useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import Leaderboard from './components/Leaderboard';
 import PlayerStats from './components/PlayerStats';
 import RankSelector from './components/RankSelector';
@@ -21,9 +21,13 @@ export default function App() {
                     );
                 }
                 let actualData = await response.json();
-                setData(actualData);
+                setData(actualData.filter(el => el.tierNumber > 0).sort((a, b) => (a.mu < b.mu)? 1 : -1).map((el, index) => {
+                    return {  
+                        rank: index + 1,
+                        ...el
+                    }
+                }));
                 setError(null);
-                console.log(actualData);
             } catch(err) {
                 setError(err.message);
                 setData(null);
