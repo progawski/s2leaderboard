@@ -1,7 +1,7 @@
-import react from 'react';
+import React from 'react';
 
-export default function PlayerStats() {
+export default function PlayerStats(props) {
     return(
-        <h1>PlayerStats</h1>
+        <h1>{props.displayName}</h1>
     )
 }

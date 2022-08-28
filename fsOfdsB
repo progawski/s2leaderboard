@@ -1,0 +1,29 @@
+[33mcommit 2507c5ab098e5e5bb364880089aea782a681e020[m[33m ([m[1;36mHEAD -> [m[1;32mfeat/Add-Leaderboard-component[m[33m, [m[1;31morigin/feat/Add-Leaderboard-component[m[33m)[m
+Author: Piotr Rogawski <rogawski.piotr@gmail.com>
+Date:   Wed Aug 24 15:21:32 2022 +0200
+
+    feat/Add loading spinner
+
+[33mcommit 2952aa87d76777781ec27e9ed8bdb082626a9e8c[m
+Author: Piotr Rogawski <rogawski.piotr@gmail.com>
+Date:   Tue Aug 23 23:40:01 2022 +0200
+
+    feat/Add react-virtualized table
+
+[33mcommit f8514f7ed94dd98393e0825e1d76f8879f6634a6[m
+Author: Piotr Rogawski <rogawski.piotr@gmail.com>
+Date:   Wed Aug 17 22:11:12 2022 +0200
+
+    feat/Add simple scrollable table with fetched data
+
+[33mcommit 009c5a74ad59e70844ccd5eeed3b17684a35191d[m[33m ([m[1;31morigin/master[m[33m, [m[1;32mmaster[m[33m)[m
+Author: Piotr Rogawski <rogawski.piotr@gmail.com>
+Date:   Wed Aug 17 16:42:49 2022 +0200
+
+    feat/Initialize App component with basic elements
+
+[33mcommit 6fbb0a3003248487277a95925eb2c774ad8bf190[m
+Author: Piotr Rogawski <rogawski.piotr@gmail.com>
+Date:   Mon Aug 15 11:24:41 2022 +0200
+
+    Initialize project using Create React App
