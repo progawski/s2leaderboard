@@ -1,16 +1,10 @@
 import React from 'react';
-import { List, Table, Column, SortDirection, AutoSizer, defaultTableRowRenderer} from "react-virtualized";
-import LeaderboardRow from './LeaderboardRow';
+import { Table, Column, SortDirection, AutoSizer} from "react-virtualized";
 import Spinner from './Spinner';
-import Immutable from "immutable";
-import _, { transform } from "lodash";
-import 'react-virtualized/styles.css'; // only needs to be imported once
+import _ from "lodash";
+import 'react-virtualized/styles.css';
 
 export default function Leaderboard(props) {
-
-    // const sortedData = props.data?.filter(el => el.tierNumber > 0).sort((a, b) => (a.mu < b.mu)? 1 : -1);
-
-    // const [sorting, setSorting] = React.useState({by: 'rank', asc: true})
     const [data, setData] = React.useState(props.data)
     const [sortBy, setSortBy] = React.useState('rank');
     const [sortDirection, setSortDirection] = React.useState(SortDirection.ASC);
@@ -26,7 +20,11 @@ export default function Leaderboard(props) {
     }, [props.data])
 
     React.useEffect(() => {
-        if(data) setSortedList(sortList({sortBy, sortDirection}));
+        if(data){
+            setSortedList(sortList({sortBy, sortDirection}));
+            setAlphaPlayer(data[0].playfabId);
+            setBravoPlayer(data[1].playfabId);
+        }
     }, [data])
 
     function sort({sortBy, sortDirection}) {
@@ -55,35 +53,37 @@ export default function Leaderboard(props) {
     
     function headerRowRenderer({columns, style}) {
         return(
-
             <div className='leaderboard-header' style={{...style, ...headerStyle}}>
                 {columns}
             </div>
         )   
     }
 
-
-
-    function showAlphaPlayer(e, rowData) {
-
-        setAlphaPlayer(rowData.playfabId);
-
-        // const leaderboardRow = e.currentTarget;
-
-        // leaderboardRow.classList.add('leaderboard-row-active')
-
-        // console.log(e.currentTarget.classList);
+    function changeAlphaPlayer(player) {
+        setAlphaPlayer(player);
+        if(player === bravoPlayer){
+            changeBravoPlayer(alphaPlayer, true)
+        }
     }
 
-    function showBravoPlayer(e, rowData) {
-        setBravoPlayer(rowData.playfabId);
+    function changeBravoPlayer(player, switchPlayers) {
+        if(player !== alphaPlayer || switchPlayers){
+            setBravoPlayer(player);
+        }
     }
 
+    function setRowClass(player) {
+        if(player === alphaPlayer){
+            return 'leaderboard-row-alpha'
+        } else if(player === bravoPlayer){
+            return 'leaderboard-row-bravo'
+        }
+    }
 
     function rowRenderer({columns, key, style, rowData}){
         return(
             <div style={style} key={key}>
-                <div onMouseEnter={(e) => showBravoPlayer(e, rowData)} onClick={(e) => showAlphaPlayer(e, rowData)} className={alphaPlayer === rowData.playfabId? 'leaderboard-row leaderboard-row-alpha' : 'leaderboard-row'}>{columns}</div>
+                <div onMouseEnter={() => changeBravoPlayer(rowData.playfabId)} onClick={() => changeAlphaPlayer(rowData.playfabId)} className={`leaderboard-row ${setRowClass(rowData.playfabId)}`}>{columns}</div>
             </div>
         )
     }
@@ -103,10 +103,6 @@ export default function Leaderboard(props) {
         )
     }
 
-    function onRowClick(e){
-        console.log(e);
-    }
-
     const headerStyle = {
         display: 'flex',
         justifyContent: 'center',
@@ -117,8 +113,6 @@ export default function Leaderboard(props) {
         padding: '0',
     }
     
-
-
     return(
         <div id='leaderboard-container'>
             <div id='leaderboard'>  
@@ -137,7 +131,6 @@ export default function Leaderboard(props) {
                         headerRowRenderer = {headerRowRenderer}
                         rowRenderer = {rowRenderer}
                         noRowsRenderer = {noRowsRenderer}
-                        onRowClick = {onRowClick}
                     >
                     <Column label="RANK" dataKey="rank" width={100} headerRenderer = {headerRenderer} />
                     <Column label="NAME" dataKey="displayName" width = {300} headerRenderer = {headerRenderer} cellRenderer = {nameColumn} />

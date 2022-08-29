@@ -42,7 +42,7 @@ export default function App() {
 
     return(
         <div className='background'>
-            <div className="content">
+            <div className="content noselect">
                 <header>
                     <img id='header-logo' src='images/s2_logo.png'/>
                     <h1 id="header-title">RANKED LEADERBOARD</h1>     
