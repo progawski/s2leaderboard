@@ -21,7 +21,8 @@ export default function Leaderboard(props) {
             setSortedList(sortList({sortBy, sortDirection}));
             setAlphaPlayer(data[0].playfabId);
             setBravoPlayer(data[1].playfabId);
-            props.getPlayerId(data[0].playfabId);
+            props.getAlphaPlayerId(data[0].playfabId);
+            props.getBravoPlayerId(data[1].playfabId);
         }
     }, [data])
 
@@ -59,7 +60,7 @@ export default function Leaderboard(props) {
 
     function changeAlphaPlayer(player) {
         setAlphaPlayer(player);
-        props.getPlayerId(player);
+        props.getAlphaPlayerId(player);
         if(player === bravoPlayer){
             changeBravoPlayer(alphaPlayer, true);
         }
@@ -68,6 +69,7 @@ export default function Leaderboard(props) {
     function changeBravoPlayer(player, switchPlayers) {
         if(player !== alphaPlayer || switchPlayers){
             setBravoPlayer(player);
+            props.getBravoPlayerId(player);
         }
     }
 

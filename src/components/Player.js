@@ -54,17 +54,17 @@ export default function Player(props) {
         <div className='player-container'>
             {!playerData? <Spinner /> : 
                 <>
-                    <div>{playerData.displayName}</div>
+                    <div className='player-stats-name' style={{backgroundColor:  props.isAlpha? 'rgba(228, 11, 66, 0.5)' : 'rgba(39, 143, 207, 0.5)'}}>{playerData.displayName}</div>
                     <img className='rank-img-big' src={`images/tiers/${playerData.playerStats.rating.tierNumber}.png`} alt='Rank icon'/>
                     <div className='player-stats-container'>
-                        <PlayerStats image={true} data={playerData.playerStats.rating.formattedTier} />
-                        <PlayerStats image={true} data={playerData.playerStats.totalGames} />
-                        <PlayerStats image={true} data={formatGames([playerData.playerStats.wonGames, playerData.playerStats.tiedGames, playerData.playerStats.lostGames])} />
-                        <PlayerStats image={true} data={playerData.playerStats.totalKills} />
-                        <PlayerStats image={true} data={playerData.playerStats.totalDeaths} />
-                        <PlayerStats image={true} data={calculateKd([playerData.playerStats.totalKills, playerData.playerStats.totalDeaths])} />
-                        <PlayerStats image={true} data={playerData.playerStats.totalCaps} />
-                        <PlayerStats image={true} data={formatTime(playerData.playerStats.totalGatherTime)} />
+                        <PlayerStats image={'star-icon'} data={playerData.playerStats.rating.formattedTier} />
+                        <PlayerStats image={'gamepad-icon'} data={playerData.playerStats.totalGames} />
+                        <PlayerStats image={'trophy-icon'} data={formatGames([playerData.playerStats.wonGames, playerData.playerStats.tiedGames, playerData.playerStats.lostGames])} />
+                        <PlayerStats image={'crosshair-icon'} data={playerData.playerStats.totalKills} />
+                        <PlayerStats image={'skull-icon'} data={playerData.playerStats.totalDeaths} />
+                        <PlayerStats image={'percent-icon'} data={calculateKd([playerData.playerStats.totalKills, playerData.playerStats.totalDeaths])} />
+                        <PlayerStats image={'flag-icon'} data={playerData.playerStats.totalCaps} />
+                        <PlayerStats image={'clock-icon'} data={formatTime(playerData.playerStats.totalGatherTime)} />
                     </div>
                 </>
             }

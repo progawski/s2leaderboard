@@ -8,7 +8,8 @@ export default function App() {
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [playerId, setPlayerId] = useState('');
+    const [alphaPlayerId, setAlphaPlayerId] = useState('');
+    const [bravoPlayerId, setBravoPlayerId] = useState('');
 
     useEffect(() => {
         const getData = async () => {
@@ -40,8 +41,12 @@ export default function App() {
         getData();
     }, [])
 
-    function getPlayerId(id){
-        setPlayerId(id);
+    function getAlphaPlayerId(id){
+        setAlphaPlayerId(id);
+    }
+
+    function getBravoPlayerId(id){
+        setBravoPlayerId(id);
     }
 
     return(
@@ -53,9 +58,9 @@ export default function App() {
                     <RankSelector/>
                 </header>
                 <main>     
-                    <Player playerId={playerId}/>
-                    <Player playerId={playerId}/>
-                    <Leaderboard getPlayerId={getPlayerId} data={data} isLoading={loading}/>
+                    <Player playerId={alphaPlayerId} isAlpha={true}/>
+                    <Player playerId={bravoPlayerId} isAlpha={false}/>
+                    <Leaderboard getAlphaPlayerId={getAlphaPlayerId} getBravoPlayerId={getBravoPlayerId} data={data} isLoading={loading}/>
                 </main>
                 <footer>
 
