@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { Table, Column, SortDirection, AutoSizer} from "react-virtualized";
 import Spinner from './Spinner';
 import _ from "lodash";
@@ -12,18 +12,16 @@ export default function Leaderboard(props) {
     const [alphaPlayer, setAlphaPlayer] = React.useState(null);
     const [bravoPlayer, setBravoPlayer] = React.useState(null);
 
-    console.log('alphaPlayer:', alphaPlayer);
-    console.log('bravoPlayer:', bravoPlayer);
-
-    React.useEffect(() => {
+    useEffect(() => {
         setData(props.data);
     }, [props.data])
 
-    React.useEffect(() => {
+    useEffect(() => {
         if(data){
             setSortedList(sortList({sortBy, sortDirection}));
             setAlphaPlayer(data[0].playfabId);
             setBravoPlayer(data[1].playfabId);
+            props.getPlayerId(data[0].playfabId);
         }
     }, [data])
 
@@ -45,7 +43,7 @@ export default function Leaderboard(props) {
     function nameColumn({cellData,rowData}){
         return (
             <div className='name-cell'>
-                <img className='rank-img-small' src={`images/tiers/${rowData.tierNumber}.png`}/>
+                <img className='rank-img-small' src={`images/tiers/${rowData.tierNumber}.png`} alt='Rank icon'/>
                 <span>{cellData}</span>
             </div>
         )
@@ -61,8 +59,9 @@ export default function Leaderboard(props) {
 
     function changeAlphaPlayer(player) {
         setAlphaPlayer(player);
+        props.getPlayerId(player);
         if(player === bravoPlayer){
-            changeBravoPlayer(alphaPlayer, true)
+            changeBravoPlayer(alphaPlayer, true);
         }
     }
 
@@ -92,7 +91,7 @@ export default function Leaderboard(props) {
         return(
             <div style={{position: 'relative'}}>
                 <div style={{color: sortBy === dataKey? '#A1D880' : '#fff'}}>{label}</div>      
-                {sortBy === dataKey? <img className='sort-icon' style={{transform: sortDirection === 'ASC'? 'rotate(0deg) translateX(-50%)' : 'rotate(180deg) translateX(50%)'}} src='images/sort-icon.png'/> : null}
+                {sortBy === dataKey? <img className='sort-icon' style={{transform: sortDirection === 'ASC'? 'rotate(0deg) translateX(-50%)' : 'rotate(180deg) translateX(50%)'}} src='images/icons/sort-icon.png'/> : null}
             </div>
         )
     }

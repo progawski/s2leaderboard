@@ -1,0 +1,29 @@
+.player-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #000;
+    background-color: rgba(79, 103, 63, 0.85);
+    flex: 1;
+    padding: 20px;
+}
+
+.player-stats-container{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+}
+
+.player-stats{
+    display: flex;
+    align-items: center;
+    height: 40px;
+    background-color: rgba(39, 57, 37, 0.63);
+    border: 1px solid #000;
+}
+
+.rank-img-big{
+    width: 120px;
+}

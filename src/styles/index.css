@@ -2,6 +2,7 @@
 @import url('rankSelector.css');
 @import url('leaderboard.css');
 @import url('spinner.css');
+@import url('player.css');
 
 @font-face {
     font-family: 'Equalize';

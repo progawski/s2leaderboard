@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import Leaderboard from './components/Leaderboard';
-import PlayerStats from './components/PlayerStats';
+import Player from './components/Player';
 import RankSelector from './components/RankSelector';
 
 export default function App() {
@@ -8,6 +8,7 @@ export default function App() {
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [playerId, setPlayerId] = useState('');
 
     useEffect(() => {
         const getData = async () => {
@@ -39,6 +40,9 @@ export default function App() {
         getData();
     }, [])
 
+    function getPlayerId(id){
+        setPlayerId(id);
+    }
 
     return(
         <div className='background'>
@@ -49,8 +53,9 @@ export default function App() {
                     <RankSelector/>
                 </header>
                 <main>     
-                    <PlayerStats/>
-                    <Leaderboard data={data} isLoading={loading}/>
+                    <Player playerId={playerId}/>
+                    <Player playerId={playerId}/>
+                    <Leaderboard getPlayerId={getPlayerId} data={data} isLoading={loading}/>
                 </main>
                 <footer>
 

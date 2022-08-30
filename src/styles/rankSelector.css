@@ -16,7 +16,7 @@ select{
     outline: none;
     cursor: pointer;
     padding-right: 50px;
-    background-image: url('/public/images/dropdown-icon.png');
+    background-image: url('/public/images/icons/dropdown-icon.png');
     background-size: 20px auto;
     background-repeat: no-repeat;
     background-position: calc(100% - 10px) center;

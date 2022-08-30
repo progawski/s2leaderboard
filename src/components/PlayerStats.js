@@ -1,7 +1,14 @@
 import React from 'react';
 
-export default function PlayerStats(props) {
+export default function PlayerStats(props){
     return(
-        <h1>{props.displayName}</h1>
+        <div className='player-stats'>
+            <div className='player-stats-icon-wrapper'>
+                <img className='player-stats-icon' src='' alt=''/>
+            </div>
+            <div className='player-stats-data'>
+                {props.data}
+            </div>
+        </div>
     )
 }
