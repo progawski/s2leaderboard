@@ -1,16 +1,17 @@
 import React, {useState, useEffect} from 'react';
 import { Table, Column, SortDirection, AutoSizer} from "react-virtualized";
 import Spinner from './Spinner';
-import _ from "lodash";
+import _, { set } from "lodash";
 import 'react-virtualized/styles.css';
 
 export default function Leaderboard(props) {
-    const [data, setData] = React.useState(props.data)
-    const [sortBy, setSortBy] = React.useState('rank');
-    const [sortDirection, setSortDirection] = React.useState(SortDirection.ASC);
-    const [sortedList, setSortedList] = React.useState(null);
-    const [alphaPlayer, setAlphaPlayer] = React.useState(null);
-    const [bravoPlayer, setBravoPlayer] = React.useState(null);
+    const [data, setData] = useState(props.data)
+    const [sortBy, setSortBy] = useState('rank');
+    const [sortDirection, setSortDirection] = useState(SortDirection.ASC);
+    const [sortedList, setSortedList] = useState(null);
+    const [alphaPlayer, setAlphaPlayer] = useState(null);
+    const [bravoPlayer, setBravoPlayer] = useState(null);
+    const [teamColor, setTeamColor] = useState('bravo')
 
     useEffect(() => {
         setData(props.data);
@@ -25,6 +26,14 @@ export default function Leaderboard(props) {
             props.getBravoPlayerId(data[1].playfabId);
         }
     }, [data])
+
+    useEffect(() => {
+        props.getAlphaPlayerId(alphaPlayer);
+    }, [alphaPlayer])
+
+    useEffect(() => {
+        props.getBravoPlayerId(bravoPlayer);
+    }, [bravoPlayer])
 
     function sort({sortBy, sortDirection}) {
         const sortedList = sortList({sortBy, sortDirection});
@@ -58,18 +67,12 @@ export default function Leaderboard(props) {
         )   
     }
 
-    function changeAlphaPlayer(player) {
-        setAlphaPlayer(player);
-        props.getAlphaPlayerId(player);
-        if(player === bravoPlayer){
-            changeBravoPlayer(alphaPlayer, true);
-        }
-    }
-
-    function changeBravoPlayer(player, switchPlayers) {
-        if(player !== alphaPlayer || switchPlayers){
+    function changePlayer(player) {
+        const color = document.querySelector('input[name="team-color"]:checked').value;
+        if(color === 'alpha'){
+            setAlphaPlayer(player);
+        } else {
             setBravoPlayer(player);
-            props.getBravoPlayerId(player);
         }
     }
 
@@ -84,7 +87,7 @@ export default function Leaderboard(props) {
     function rowRenderer({columns, key, style, rowData}){
         return(
             <div style={style} key={key}>
-                <div onMouseEnter={() => changeBravoPlayer(rowData.playfabId)} onClick={() => changeAlphaPlayer(rowData.playfabId)} className={`leaderboard-row ${setRowClass(rowData.playfabId)}`}>{columns}</div>
+                <div onClick={() => changePlayer(rowData.playfabId)} className={`leaderboard-row ${setRowClass(rowData.playfabId)}`}>{columns}</div>
             </div>
         )
     }
@@ -142,7 +145,11 @@ export default function Leaderboard(props) {
                     </Table>
                     )}
                 </AutoSizer>
-            </div>   
+            </div>
+            <div>
+                <input onChange={() => setTeamColor('alpha')} type='radio' name='team-color' value='alpha' checked = {teamColor === 'alpha'? true : false}></input>
+                <input onChange={() => setTeamColor('bravo')} type='radio' name='team-color' value='bravo' checked = {teamColor === 'bravo'? true : false}></input>
+            </div>
         </div>
     )
 }
