@@ -6,8 +6,6 @@ export default function Player(props) {
 
     const [playerData, setPlayerData] = useState(props.playerData);
 
-    console.log(playerData);
-
     useEffect(() => {
         setPlayerData(props.playerData)
     }, [props.playerData])
@@ -29,22 +27,18 @@ export default function Player(props) {
 
     return(
         <div className='player-container'>
-            {!playerData? <Spinner /> : 
-                <>
-                    <div className='player-stats-name' style={{backgroundColor:  props.isAlpha? 'rgba(228, 11, 66, 0.5)' : 'rgba(39, 143, 207, 0.5)'}}>{playerData.displayName}</div>
-                    <img className='rank-img-big' src={`images/tiers/${playerData.playerStats.rating.tierNumber}.png`} alt='Rank icon'/>
-                    <div className='player-stats-container'>
-                        <PlayerStats image={'star-icon'} data={playerData.playerStats.rating.formattedTier} />
-                        <PlayerStats image={'gamepad-icon'} data={playerData.playerStats.totalGames} />
-                        <PlayerStats image={'trophy-icon'} data={formatGames([playerData.playerStats.wonGames, playerData.playerStats.tiedGames, playerData.playerStats.lostGames])} />
-                        <PlayerStats image={'crosshair-icon'} data={playerData.playerStats.totalKills} />
-                        <PlayerStats image={'skull-icon'} data={playerData.playerStats.totalDeaths} />
-                        <PlayerStats image={'percent-icon'} data={calculateKd([playerData.playerStats.totalKills, playerData.playerStats.totalDeaths])} />
-                        <PlayerStats image={'flag-icon'} data={playerData.playerStats.totalCaps} />
-                        <PlayerStats image={'clock-icon'} data={formatTime(playerData.playerStats.totalGatherTime)} />
-                    </div>
-                </>
-            }
+            <div className='player-stats-name' style={{backgroundColor:  props.isAlpha? 'rgba(228, 11, 66, 0.5)' : 'rgba(39, 143, 207, 0.5)'}}>{!playerData? '' : playerData.displayName}</div>
+            {!playerData? <Spinner/> : <img className='rank-img-big' src={`images/tiers/${playerData.playerStats.rating.tierNumber}.png`} alt='Rank icon'/>}
+            <div className='player-stats-container'>
+                <PlayerStats image={'star-icon'} data={!playerData? '' : playerData.playerStats.rating.formattedTier} />
+                <PlayerStats image={'gamepad-icon'} data={!playerData? '' : playerData.playerStats.totalGames} />
+                <PlayerStats image={'trophy-icon'} data={!playerData? '' : formatGames([playerData.playerStats.wonGames, playerData.playerStats.tiedGames, playerData.playerStats.lostGames])} />
+                <PlayerStats image={'crosshair-icon'} data={!playerData? '' : playerData.playerStats.totalKills} />
+                <PlayerStats image={'skull-icon'} data={!playerData? '' : playerData.playerStats.totalDeaths} />
+                <PlayerStats image={'percent-icon'} data={!playerData? '' : calculateKd([playerData.playerStats.totalKills, playerData.playerStats.totalDeaths])} />
+                <PlayerStats image={'flag-icon'} data={!playerData? '' : playerData.playerStats.totalCaps} />
+                <PlayerStats image={'clock-icon'} data={!playerData? '' : formatTime(playerData.playerStats.totalGatherTime)} />
+            </div>
         </div>
     )
 }

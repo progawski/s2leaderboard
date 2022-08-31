@@ -66,15 +66,6 @@ export default function Leaderboard(props) {
         )   
     }
 
-    function changePlayer(playerData) {
-        const color = document.querySelector('input[name="team-color"]:checked').value;
-        if(color === 'alpha'){
-            setAlphaPlayerData(playerData);
-        } else {
-            setBravoPlayerData(playerData);
-        }
-    }
-
     function changeAlphaPlayer(playerData) {
         setAlphaPlayerData(playerData);
         if(playerData.playfabId === bravoPlayerData.playfabId){
@@ -125,7 +116,7 @@ export default function Leaderboard(props) {
         fontFamily: 'Montserrat',
         backgroundColor: '#11201B', 
         margin: '0', 
-        padding: '0',
+        paddingRight: '17px'
     }
     
     return(

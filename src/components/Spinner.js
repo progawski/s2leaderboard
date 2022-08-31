@@ -1,21 +1,20 @@
 import React from 'react';
 
 export default function Spinner() {
-    const spinnerStyle = {
-     
-    }
     return(
-        <div style={spinnerStyle} className='spinner'>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
+        <div className='spinner-container'>
+            <div className='spinner'>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
         </div>
     )
 }
