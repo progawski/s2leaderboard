@@ -4,36 +4,13 @@ import Spinner from './Spinner';
 
 export default function Player(props) {
 
-    const [playerData, setPlayerData] = useState(null);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
-
-    useEffect(() => {
-        const getData = async () => {
-            try {
-                const response = await fetch(
-                    `https://78.47.147.210:9001/api/v1/ratings/playfab/${props.playerId}`
-                );
-                if (!response.ok) {
-                    throw new Error(
-                        `This is an HTTP error: The status is ${response.status}`
-                    );
-                }
-                let actualData = await response.json();
-                setPlayerData(actualData);
-                setError(null);
-            } catch(err) {
-                setError(err.message);
-                setPlayerData(null);
-            } finally {
-                setLoading(false);
-            }
- 
-        }
-        getData();
-    }, [props.playerId])
+    const [playerData, setPlayerData] = useState(props.playerData);
 
     console.log(playerData);
+
+    useEffect(() => {
+        setPlayerData(props.playerData)
+    }, [props.playerData])
 
     function formatGames(games) {
         return games.join('-');

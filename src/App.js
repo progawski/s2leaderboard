@@ -8,14 +8,14 @@ export default function App() {
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [alphaPlayerId, setAlphaPlayerId] = useState('');
-    const [bravoPlayerId, setBravoPlayerId] = useState('');
+    const [alphaPlayerData, setAlphaPlayerData] = useState(null);
+    const [bravoPlayerData, setBravoPlayerData] = useState(null);
 
     useEffect(() => {
         const getData = async () => {
             try {
                 const response = await fetch(
-                    'https://78.47.147.210:9001/api/v1/ratings/all'
+                    'http://78.47.147.210:9000/api/v1/ratings/all?withPlayerStats=true'
                 );
                 if (!response.ok) {
                     throw new Error(
@@ -41,12 +41,12 @@ export default function App() {
         getData();
     }, [])
 
-    function getAlphaPlayerId(id){
-        setAlphaPlayerId(id);
+    function getAlphaPlayerData(data){
+        setAlphaPlayerData(data);
     }
 
-    function getBravoPlayerId(id){
-        setBravoPlayerId(id);
+    function getBravoPlayerData(data){
+        setBravoPlayerData(data);
     }
 
     return(
@@ -58,9 +58,9 @@ export default function App() {
                     <RankSelector/>
                 </header>
                 <main>     
-                    <Player playerId={alphaPlayerId} isAlpha={true}/>
-                    <Player playerId={bravoPlayerId} isAlpha={false}/>
-                    <Leaderboard getAlphaPlayerId={getAlphaPlayerId} getBravoPlayerId={getBravoPlayerId} data={data} isLoading={loading}/>
+                    <Player playerData={alphaPlayerData} isAlpha={true}/>
+                    <Player playerData={bravoPlayerData} isAlpha={false}/>
+                    <Leaderboard getAlphaPlayerData={getAlphaPlayerData} getBravoPlayerData={getBravoPlayerData} data={data} isLoading={loading}/>
                 </main>
                 <footer>
 
