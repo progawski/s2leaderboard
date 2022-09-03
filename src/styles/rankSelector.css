@@ -24,3 +24,17 @@ select{
     -webkit-text-stroke: 0.5px black;
     text-shadow: -0.5px -0.5px 0 #000, 0.5px -0.5px 0 #000, -0.5px 0.5px 0 #000, 0.5px 0.5px 0 #000;
 }
+
+@media screen and (max-width: 1199.98px){
+    select{
+        font-size: 16px;
+        background-size: 16px auto;
+        padding: 8px 52px 8px 12px;
+    }
+}
+
+@media screen and (max-width: 767.98px){
+    select{
+      position: static;
+    }
+}

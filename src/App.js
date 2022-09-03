@@ -10,6 +10,13 @@ export default function App() {
     const [error, setError] = useState(null);
     const [alphaPlayerData, setAlphaPlayerData] = useState(null);
     const [bravoPlayerData, setBravoPlayerData] = useState(null);
+    const [bravoPlayerVisible, setBravoPlayerVisible] = useState(true);
+    const [playersContainerVisible, setPlayersContainerVisible] = useState(false);
+
+    const currentYear = new Date().getFullYear();
+    const mediaQuerySmall = window.matchMedia('(max-width: 767.98px)');
+    const mediaQueryLarge = window.matchMedia('(max-width: 1199.98px)');
+    const playersContainer = document.querySelector('.players-container');
 
     useEffect(() => {
         const getData = async () => {
@@ -43,27 +50,69 @@ export default function App() {
 
     function getAlphaPlayerData(data){
         setAlphaPlayerData(data);
+        setPlayersContainerVisible(true);
+        console.log(playersContainerVisible);
     }
 
     function getBravoPlayerData(data){
         setBravoPlayerData(data);
     }
 
+    // if(mediaQuerySmall.matches && playersContainerVisible){
+    //     setPlayersContainerVisible(false);
+    // }
+
+    mediaQuerySmall.addEventListener('change', event => {
+      if (event.matches) {
+        setPlayersContainerVisible(false);
+      } else {
+        setPlayersContainerVisible(true);
+      }
+    })
+    
+    if(mediaQueryLarge.matches && bravoPlayerVisible){
+        setBravoPlayerVisible(false);
+    }
+
+    mediaQueryLarge.addEventListener('change', event => {
+      if (event.matches) {
+        setBravoPlayerVisible(false);
+      } else {
+        setBravoPlayerVisible(true);
+      }
+    })
+
+    // if(playersContainerVisible){
+    //     playersContainer.style.display = 'fixed';
+    // } else {
+    //     playersContainer.style.display = 'none';
+    // }
+
+    document.addEventListener('click', (e) => {
+        if(playersContainerVisible && playersContainer.style.display === 'flex') setPlayersContainerVisible(false);
+      });
+    
     return(
         <div className='background'>
             <div className="content noselect">
                 <header>
-                    <img id='header-logo' src='images/s2_logo.png'/>
-                    <h1 id="header-title">RANKED LEADERBOARD</h1>     
+                    <div>
+                        <img id='header-logo' src='images/s2_logo.png'/>
+                        <h1 id="header-title">RANKED LEADERBOARD</h1>   
+                    </div>
                     <RankSelector/>
                 </header>
-                <main>     
-                    <Player playerData={alphaPlayerData} isAlpha={true}/>
-                    <Player playerData={bravoPlayerData} isAlpha={false}/>
+                <main>
+                    {/* {playersContainerVisible? */}
+                    <div className='players-container' style={{display: (playersContainerVisible || !mediaQuerySmall.matches)?  'flex' : 'none'}}>
+                        <Player playerData={alphaPlayerData} isAlpha={true}/>
+                        {bravoPlayerVisible? <Player playerData={bravoPlayerData} isAlpha={false}/> : null}
+                    </div>
+                    {/* : null} */}
                     <Leaderboard getAlphaPlayerData={getAlphaPlayerData} getBravoPlayerData={getBravoPlayerData} data={data} isLoading={loading}/>
                 </main>
                 <footer>
-
+                    <div>COPYRIGHT @ {currentYear} BY PIOTR 'PROTO' ROGAWSKI</div>
                 </footer>
             </div>
         </div>

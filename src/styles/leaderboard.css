@@ -4,7 +4,11 @@
     border: 1px solid #000;
     background-color: rgba(79, 103, 63, 0.85);
     width: 810px;
+    min-width: 400px;
+    max-width: 810px;
     padding: 20px;
+    flex-grow: 1;
+    flex-shrink: 1;
 }
 
 #leaderboard {
@@ -12,6 +16,7 @@
     width: 100%;
     color: #fff;
     font-family: 'Bakbak One Regular';
+    height: 536px;
 }
 
 .leaderboard-header{
@@ -73,4 +78,10 @@
     -webkit-user-select: none; /* Safari */
     -ms-user-select: none; /* IE 10 and IE 11 */
     user-select: none; /* Standard syntax */
+}
+
+@media screen and (max-width: 1199.98px){
+    #leaderboard{
+        font-size: 15px;
+    }
 }

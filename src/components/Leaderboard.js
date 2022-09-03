@@ -11,6 +11,9 @@ export default function Leaderboard(props) {
     const [sortedList, setSortedList] = useState(null);
     const [alphaPlayerData, setAlphaPlayerData] = useState(null);
     const [bravoPlayerData, setBravoPlayerData] = useState(null);
+    const [bravoSelection, setBravoSelection] = useState(true);
+    
+    const mediaQueryLarge = window.matchMedia('(max-width: 1198.98px)');
 
     useEffect(() => {
         setData(props.data);
@@ -81,7 +84,7 @@ export default function Leaderboard(props) {
     function setRowClass(playerId) {
         if(playerId === alphaPlayerData.playfabId){
             return 'leaderboard-row-alpha'
-        } else if(playerId === bravoPlayerData.playfabId){
+        } else if(playerId === bravoPlayerData.playfabId && bravoSelection){
             return 'leaderboard-row-bravo'
         }
     }
@@ -89,7 +92,7 @@ export default function Leaderboard(props) {
     function rowRenderer({columns, key, style, rowData}){
         return(
             <div style={style} key={key}>
-                <div onMouseEnter={() => changeBravoPlayer(rowData)} onClick={() => changeAlphaPlayer(rowData)} className={`leaderboard-row ${setRowClass(rowData.playfabId)}`}>{columns}</div>
+                <div onMouseEnter={bravoSelection? () => changeBravoPlayer(rowData) : null} onClick={() => changeAlphaPlayer(rowData)} className={`leaderboard-row ${setRowClass(rowData.playfabId)}`}>{columns}</div>
             </div>
         )
     }
@@ -109,6 +112,18 @@ export default function Leaderboard(props) {
         )
     }
 
+    if(mediaQueryLarge.matches && bravoSelection) {
+        setBravoSelection(false);
+    }
+
+    mediaQueryLarge.addEventListener('change', event => {
+        if (event.matches) {
+          setBravoSelection(false);
+        } else {
+          setBravoSelection(true);
+        }
+    })
+
     const headerStyle = {
         display: 'flex',
         justifyContent: 'center',
@@ -118,7 +133,7 @@ export default function Leaderboard(props) {
         margin: '0', 
         paddingRight: '17px'
     }
-    
+
     return(
         <div id='leaderboard-container'>
             <div id='leaderboard'>  
