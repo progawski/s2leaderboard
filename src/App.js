@@ -5,18 +5,16 @@ import RankSelector from './components/RankSelector';
 
 export default function App() {
 
-    const [data, setData] = useState(null);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
-    const [alphaPlayerData, setAlphaPlayerData] = useState(null);
-    const [bravoPlayerData, setBravoPlayerData] = useState(null);
+    const [data, setData] = useState(null); // Filtered and sorted data from API's response
+    // const [error, setError] = useState(null);
+    const [alphaPlayerData, setAlphaPlayerData] = useState(null); // Data of selected alpha player
+    const [bravoPlayerData, setBravoPlayerData] = useState(null); // Data of selected bravo player
+
     const [bravoPlayerVisible, setBravoPlayerVisible] = useState(true);
     const [playersContainerVisible, setPlayersContainerVisible] = useState(false);
 
-    const currentYear = new Date().getFullYear();
-    const mediaQuerySmall = window.matchMedia('(max-width: 767.98px)');
-    const mediaQueryLarge = window.matchMedia('(max-width: 1199.98px)');
-    const playersContainer = document.querySelector('.players-container');
+    const currentYear = new Date().getFullYear(); // Get current year to display in footer
+    const playersContainer = document.querySelector('.players-container'); // Alpha and bravo players' container
 
     useEffect(() => {
         const getData = async () => {
@@ -26,90 +24,79 @@ export default function App() {
                 );
                 if (!response.ok) {
                     throw new Error(
-                        `This is an HTTP error: The status is ${response.status}`
+                        `HTTP error status: ${response.status}`
                     );
                 }
-                let actualData = await response.json();
-                setData(actualData.filter(el => el.tierNumber > 0).sort((a, b) => (a.mu < b.mu)? 1 : -1).map((el, index) => {
+                // Filter data so the leaderboard shows only ranked players. Sort them in ascending order basing on "mu" indicator
+                let responseData = await response.json();
+                responseData = responseData.filter(el => el.tierNumber > 0).sort((a, b) => (a.mu < b.mu)? 1 : -1);
+                setData(responseData.map((el, index) => {
                     return {  
                         rank: index + 1,
                         ...el
                     }
                 }));
-                setError(null);
+                // setError(null);
             } catch(err) {
-                setError(err.message);
+                // setError(err.message);
+                console.log(err.message);
                 setData(null);
-            } finally {
-                setLoading(false);
             }
- 
         }
         getData();
     }, [])
 
-    function getAlphaPlayerData(data){
+    // Get alpha player's data from Leaderboard in order to pass it to the Player component
+    const getAlphaPlayerData = (data) => {
         setAlphaPlayerData(data);
         setPlayersContainerVisible(true);
-        console.log(playersContainerVisible);
     }
 
-    function getBravoPlayerData(data){
+    // Get bravo player's data from Leaderboard in order to pass it to the Player component
+    const getBravoPlayerData = (data) => {
         setBravoPlayerData(data);
     }
 
-    // if(mediaQuerySmall.matches && playersContainerVisible){
-    //     setPlayersContainerVisible(false);
-    // }
+    
+    // Media queries
+    const mediaQuerySmall = window.matchMedia('(max-width: 767.98px)'); // Show only alpha player in a modal
+    const mediaQueryLarge = window.matchMedia('(max-width: 1199.98px)'); // Show only alpha player next to the leaderboard
 
-    mediaQuerySmall.addEventListener('change', event => {
-      if (event.matches) {
-        setPlayersContainerVisible(false);
-      } else {
-        setPlayersContainerVisible(true);
-      }
-    })
+    mediaQuerySmall.addEventListener('change', (e) => {
+      e.matches? setPlayersContainerVisible(false) : setPlayersContainerVisible(true);
+    });
     
     if(mediaQueryLarge.matches && bravoPlayerVisible){
         setBravoPlayerVisible(false);
     }
 
-    mediaQueryLarge.addEventListener('change', event => {
-      if (event.matches) {
-        setBravoPlayerVisible(false);
-      } else {
-        setBravoPlayerVisible(true);
-      }
-    })
+    mediaQueryLarge.addEventListener('change', (e) => {
+      e.matches? setBravoPlayerVisible(false) : setBravoPlayerVisible(true);
+    });
 
-    // if(playersContainerVisible){
-    //     playersContainer.style.display = 'fixed';
-    // } else {
-    //     playersContainer.style.display = 'none';
-    // }
-
-    document.addEventListener('click', (e) => {
-        if(playersContainerVisible && playersContainer.style.display === 'flex') setPlayersContainerVisible(false);
-      });
+    // Close modal on click anywhere
+    document.addEventListener('click', () => {
+        if(playersContainerVisible && playersContainer.style.display === 'flex'){
+            setPlayersContainerVisible(false); 
+        }
+    });
     
     return(
         <div className='background'>
             <div className="content noselect">
                 <header>
                     <div>
-                        <img id='header-logo' src='images/s2_logo.png'/>
+                        <img id='header-logo' src='images/s2_logo.png' alt='Soldat 2 Logo'/>
                         <h1 id="header-title">RANKED LEADERBOARD</h1>   
                     </div>
                     <RankSelector/>
                 </header>
                 <main>
-                    {/* {playersContainerVisible? */}
                     <div className='players-container' style={{display: (playersContainerVisible || !mediaQuerySmall.matches)?  'flex' : 'none'}}>
                         <Player playerData={alphaPlayerData} isAlpha={true}/>
                         {bravoPlayerVisible? <Player playerData={bravoPlayerData} isAlpha={false}/> : null}
                     </div>
-                    {/* : null} */}
-                    <Leaderboard getAlphaPlayerData={getAlphaPlayerData} getBravoPlayerData={getBravoPlayerData} data={data} isLoading={loading}/>
+                    <Leaderboard getAlphaPlayerData={getAlphaPlayerData} getBravoPlayerData={getBravoPlayerData} data={data}/>
                 </main>
                 <footer>
                     <div>COPYRIGHT @ {currentYear} BY PIOTR 'PROTO' ROGAWSKI</div>

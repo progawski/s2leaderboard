@@ -5,18 +5,16 @@
     background-color: rgba(79, 103, 63, 0.85);
     width: 810px;
     min-width: 400px;
-    max-width: 810px;
     padding: 20px;
-    flex-grow: 1;
-    flex-shrink: 1;
 }
 
 #leaderboard {
-    display: 'block';
+    display: block;
     width: 100%;
     color: #fff;
     font-family: 'Bakbak One Regular';
     height: 536px;
+    text-align: center;
 }
 
 .leaderboard-header{
@@ -28,7 +26,6 @@
 }
 
 .leaderboard-row{
-    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -41,6 +38,7 @@
     transition: all .2s;
     margin: 4px 0;
     cursor: pointer;
+    text-align: center;
 }
 
 .leaderboard-row-alpha{

@@ -16,14 +16,13 @@
     width: 300px;
     min-width: 270px;
     flex-grow: 1;
-    flex-shrink: 1;
 }
 
 .player-stats-container{
     display: flex;
     flex-direction: column;
     gap: 8px;
-    width: 100%;
+    align-self: stretch;
 }
 
 .player-stats{
@@ -35,6 +34,7 @@
     font-family: 'Bakbak One Regular', sans-serif;
     -webkit-text-stroke: 0.5px black;
     text-shadow: -0.5px -0.5px 0 #000, 0.5px -0.5px 0 #000, -0.5px 0.5px 0 #000, 0.5px 0.5px 0 #000;
+    text-align: center;
 }
 
 .player-stats-name{

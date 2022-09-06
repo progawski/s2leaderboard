@@ -6,12 +6,17 @@
 
 @font-face {
     font-family: 'Equalize';
-    src: url('/src/fonts/EQUALIZE.TTF') format('ttf');
+    src: url('/src/fonts/EqualizeRegular.woff') format('woff');
 }
 
 @font-face {
     font-family: 'Bakbak One Regular';
     src: url('/src/fonts/BakbakOneRegular.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'Montserrat';
+    src: url('/src/fonts/Montserrat.woff') format('woff');
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
