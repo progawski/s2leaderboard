@@ -172,7 +172,7 @@ export default function Leaderboard(props) {
                         noRowsRenderer = {noRowsRenderer}
                     >
                     <Column label="RANK" dataKey="rank" width={100} headerRenderer = {headerRenderer} />
-                    <Column label="NAME" dataKey="displayName" width = {300} headerRenderer = {headerRenderer} cellRenderer = {nameColumn} headerStyle={{textAlign: 'left'}}/>
+                    <Column label="NAME" dataKey="displayName" width = {300} headerRenderer = {headerRenderer} cellRenderer = {nameColumn}/>
                     <Column label="W" dataKey="wonGames" width={80} headerRenderer = {headerRenderer}/>
                     <Column label="T" dataKey="tiedGames" width={80} headerRenderer = {headerRenderer}/>
                     <Column label="L" dataKey="lostGames" width={80} headerRenderer = {headerRenderer}/>

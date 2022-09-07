@@ -50,8 +50,6 @@ export default function App() {
         getData();
     }, [])
 
-    console.log(playersContainerVisible);
-
     // Get alpha player's data from Leaderboard in order to pass it to the Player component
     const getAlphaPlayerData = (data) => {
         setAlphaPlayerData(data);
