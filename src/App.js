@@ -16,11 +16,15 @@ export default function App() {
     const currentYear = new Date().getFullYear(); // Get current year to display in footer
     const playersContainer = document.querySelector('.players-container'); // Alpha and bravo players' container
 
+    // Media queries
+    const mediaQuerySmall = window.matchMedia('(max-width: 767.98px)'); // Show only alpha player in a modal
+    const mediaQueryLarge = window.matchMedia('(max-width: 1199.98px)'); // Show only alpha player next to the leaderboard
+
     useEffect(() => {
         const getData = async () => {
             try {
                 const response = await fetch(
-                    'http://78.47.147.210:9000/api/v1/ratings/all?withPlayerStats=true'
+                    'https://stats.soldat2.com:9001/api/v1/ratings/all?withPlayerStats=true'
                 );
                 if (!response.ok) {
                     throw new Error(
@@ -46,6 +50,8 @@ export default function App() {
         getData();
     }, [])
 
+    console.log(playersContainerVisible);
+
     // Get alpha player's data from Leaderboard in order to pass it to the Player component
     const getAlphaPlayerData = (data) => {
         setAlphaPlayerData(data);
@@ -56,11 +62,6 @@ export default function App() {
     const getBravoPlayerData = (data) => {
         setBravoPlayerData(data);
     }
-
-    
-    // Media queries
-    const mediaQuerySmall = window.matchMedia('(max-width: 767.98px)'); // Show only alpha player in a modal
-    const mediaQueryLarge = window.matchMedia('(max-width: 1199.98px)'); // Show only alpha player next to the leaderboard
 
     mediaQuerySmall.addEventListener('change', (e) => {
       e.matches? setPlayersContainerVisible(false) : setPlayersContainerVisible(true);

@@ -36,5 +36,13 @@ select{
 @media screen and (max-width: 767.98px){
     select{
       position: static;
+      width: 100%;
+      max-width: 300px;
+    }
+}
+
+@media screen and (max-width: 575.98px){
+    select{
+        font-size: 14px;
     }
 }

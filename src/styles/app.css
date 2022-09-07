@@ -1,6 +1,6 @@
 body{
     background-color: rgb(42, 76, 55);
-    min-width: 450px;
+    /* min-width: 450px; */
 }
 
 .background{
@@ -38,7 +38,7 @@ header{
     font-family: 'Equalize';
     font-size: 14px;
     background-color: rgba(79, 103, 63, 0.85);
-    padding: 8px 0px;
+    padding: 8px 12px;
     border: 1px solid #000;
     -webkit-text-stroke: 0.5px black;
     -webkit-text-fill-color: white;
@@ -83,5 +83,25 @@ footer{
     }
     main{
         position: relative;
+    }
+}
+
+@media screen and (max-width: 575.98px){
+    .background{
+        padding: 10px;
+    }
+    header{
+        margin-bottom: 10px;
+    }
+    #header-logo{
+        width: 100%;
+        max-width: 300px;
+    }
+    #header-title{
+        margin-bottom: 40px;
+        font-size: 10px;
+    }
+    footer{
+        font-size: 10px;
     }
 }

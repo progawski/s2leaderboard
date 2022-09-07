@@ -4,8 +4,9 @@
     border: 1px solid #000;
     background-color: rgba(79, 103, 63, 0.85);
     width: 810px;
-    min-width: 400px;
     padding: 20px;
+    flex-grow: 1;
+    flex-shrink: 2;
 }
 
 #leaderboard {
@@ -15,6 +16,7 @@
     font-family: 'Bakbak One Regular';
     height: 536px;
     text-align: center;
+    
 }
 
 .leaderboard-header{
@@ -81,5 +83,27 @@
 @media screen and (max-width: 1199.98px){
     #leaderboard{
         font-size: 15px;
+    }
+}
+
+@media screen and (max-width: 575.98px){
+    #leaderboard-container{
+        padding: 5px;
+    }
+    #leaderboard{
+        font-size: 13px;
+        height: 446px;
+    }
+    .leaderboard-row{
+        height: 36px;
+        margin: 2px 0;
+    }
+    .rank-img-small{
+        height: 22px;
+        margin-right: 6px;
+    }
+    .sort-icon{
+        height: 8px;
+        bottom: -11px;
     }
 }

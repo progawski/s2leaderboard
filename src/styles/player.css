@@ -15,7 +15,6 @@
     padding: 20px;
     width: 300px;
     min-width: 270px;
-    flex-grow: 1;
 }
 
 .player-stats-container{
@@ -92,5 +91,27 @@
     .player-container{
         max-width: 300px;
         height: 578px;
+    }
+}
+
+@media screen and (max-width: 575.98px){
+    .player-container{
+        min-width: auto;
+        margin: 10px;
+        font-size: 14px;
+        padding: 10px;
+        height: 500px;
+    }
+    .player-stats-container{
+        gap: 4px;
+    }
+    .player-stats-data{
+        padding: 5px;
+    }
+    .player-stats-name{
+        height: 40px;
+    }
+    .player-stats-icon{
+        height: 16px;
     }
 }

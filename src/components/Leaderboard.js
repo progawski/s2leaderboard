@@ -16,6 +16,7 @@ export default function Leaderboard(props) {
     const [alphaPlayerData, setAlphaPlayerData] = useState(null);
     const [bravoPlayerData, setBravoPlayerData] = useState(null);
     const [bravoSelection, setBravoSelection] = useState(true);
+    const [rowsHeight, setRowsHeight] = useState([48, 60]);
 
     useEffect(() => {
         if(data){
@@ -34,6 +35,27 @@ export default function Leaderboard(props) {
     useEffect(() => {
         getBravoPlayerData(bravoPlayerData); // Execture parent's function every time the bravo player is changed
     }, [bravoPlayerData])
+
+    // Media queries
+    const mediaQueryLarge = window.matchMedia('(max-width: 1198.98px)');
+    const mediaQueryVerySmall = window.matchMedia('(max-width: 575.98px)');
+
+    if(mediaQueryLarge.matches && bravoSelection) {
+        setBravoSelection(false);
+    }
+
+    mediaQueryLarge.addEventListener('change', (e) => {
+        e.matches? setBravoSelection(false) : setBravoSelection(true);
+    })
+
+    // Set row and header size depends on window's size
+    useEffect(() => {
+        mediaQueryVerySmall.matches? setRowsHeight([40, 50]) : setRowsHeight([48, 60]);
+    }, [mediaQueryVerySmall])
+
+    // mediaQueryVerySmall.addEventListener('change', (e) => {
+    //     e.matches? setRowsHeight([40, 50]) : setRowsHeight([48, 60]);
+    // })
 
     const sortList = ({sortBy, sortDirection}) => {
         // Use lodash sortBy function in order to sort the table with dynamically changing sorting value
@@ -89,7 +111,7 @@ export default function Leaderboard(props) {
     const headerRenderer = ({label, sortBy, dataKey, sortDirection}) => {
         return(
             <div style={{position: 'relative'}}>
-                <div style={{color: sortBy === dataKey? '#A1D880' : '#fff'}}>{label}</div>      
+                <div style={{color: sortBy === dataKey? '#A1D880' : '#fff', textOverflow: 'ellipsis', overflow: 'hidden'}}>{label}</div>      
                 {sortBy === dataKey? <img className='sort-icon' style={{transform: sortDirection === 'ASC'? 'rotate(0deg) translateX(-50%)' : 'rotate(180deg) translateX(50%)'}} src='images/icons/sort-icon.png' alt='Sort icon'/> : null}
             </div>
         )
@@ -130,21 +152,6 @@ export default function Leaderboard(props) {
         )
     }
 
-    // Media queries
-    const mediaQueryLarge = window.matchMedia('(max-width: 1198.98px)');
-
-    if(mediaQueryLarge.matches && bravoSelection) {
-        setBravoSelection(false);
-    }
-
-    mediaQueryLarge.addEventListener('change', event => {
-        if (event.matches) {
-          setBravoSelection(false);
-        } else {
-          setBravoSelection(true);
-        }
-    })
-
     return(
         <div id='leaderboard-container'>
             <div id='leaderboard'>  
@@ -153,8 +160,8 @@ export default function Leaderboard(props) {
                     <Table
                         width = {width}
                         height = {height}
-                        headerHeight = {60}
-                        rowHeight = {48}
+                        headerHeight = {rowsHeight[1]}
+                        rowHeight = {rowsHeight[0]}
                         rowCount = {sortedList? sortedList.length : 0} /* If sorted list is ready to display use its length, otherwise set it to 0 to run noRowsRenderer function */
                         rowGetter = {({index}) => sortedList[index]}
                         sort = {sort}
@@ -165,7 +172,7 @@ export default function Leaderboard(props) {
                         noRowsRenderer = {noRowsRenderer}
                     >
                     <Column label="RANK" dataKey="rank" width={100} headerRenderer = {headerRenderer} />
-                    <Column label="NAME" dataKey="displayName" width = {300} headerRenderer = {headerRenderer} cellRenderer = {nameColumn} />
+                    <Column label="NAME" dataKey="displayName" width = {300} headerRenderer = {headerRenderer} cellRenderer = {nameColumn} headerStyle={{textAlign: 'left'}}/>
                     <Column label="W" dataKey="wonGames" width={80} headerRenderer = {headerRenderer}/>
                     <Column label="T" dataKey="tiedGames" width={80} headerRenderer = {headerRenderer}/>
                     <Column label="L" dataKey="lostGames" width={80} headerRenderer = {headerRenderer}/>
