@@ -104,7 +104,6 @@ export default function Leaderboard(props) {
         fontFamily: 'Montserrat',
         backgroundColor: '#11201B', 
         margin: '0', 
-        paddingRight: '17px'
     }
 
     // Customize header's cell style and add custom sorting indicator

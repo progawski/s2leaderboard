@@ -1,7 +1,7 @@
 .players-container{
     display: flex;
-    gap: 20px;
     flex-grow: 1;
+    margin-right: 20px;
 }
 
 .player-container{
@@ -15,12 +15,16 @@
     padding: 20px;
     width: 300px;
     min-width: 270px;
+    flex: 1;
+}
+
+.player-container:first-child{
+    margin-right: 20px;
 }
 
 .player-stats-container{
     display: flex;
-    flex-direction: column;
-    gap: 8px;
+    flex-direction: column; 
     align-self: stretch;
 }
 
@@ -34,6 +38,10 @@
     -webkit-text-stroke: 0.5px black;
     text-shadow: -0.5px -0.5px 0 #000, 0.5px -0.5px 0 #000, -0.5px 0.5px 0 #000, 0.5px 0.5px 0 #000;
     text-align: center;
+}
+
+.player-stats:not(:last-child){
+    margin-bottom: 8px;
 }
 
 .player-stats-name{
@@ -73,6 +81,9 @@
     .player-container{
         font-size: 15px;
     }
+    .players-container{
+        margin-right: 0px;
+    }
 }
 
 @media screen and (max-width: 767.98px){
@@ -92,6 +103,9 @@
         max-width: 300px;
         height: 578px;
     }
+    .player-container:first-child{
+        margin-right: 0;
+    }
 }
 
 @media screen and (max-width: 575.98px){
@@ -102,8 +116,8 @@
         padding: 10px;
         height: 500px;
     }
-    .player-stats-container{
-        gap: 4px;
+    .player-stats:not(:last-child){
+        margin-bottom: 4px;
     }
     .player-stats-data{
         padding: 5px;
