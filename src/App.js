@@ -33,7 +33,7 @@ export default function App() {
                 }
                 // Filter data so the leaderboard shows only ranked players. Sort them in ascending order basing on "mu" indicator
                 let responseData = await response.json();
-                responseData = responseData.filter(el => el.tierNumber > 0).sort((a, b) => (a.mu < b.mu)? 1 : -1);
+                responseData = responseData.filter(el => el.tierNumber > 0).sort((a, b) => (a.lowerSkillEstimate < b.lowerSkillEstimate)? 1 : -1);
                 setData(responseData.map((el, index) => {
                     return {  
                         rank: index + 1,

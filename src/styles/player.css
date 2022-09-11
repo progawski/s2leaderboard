@@ -111,7 +111,6 @@
 @media screen and (max-width: 575.98px){
     .player-container{
         min-width: auto;
-        margin: 10px;
         font-size: 14px;
         padding: 10px;
         height: 500px;
