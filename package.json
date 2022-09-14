@@ -1,6 +1,6 @@
 {
   "name": "s2leaderboard",
-  "homepage": "https://stats.soldat2.com/leaderboard",
+  "homepage": "https://progawski.eu/s2leaderboard",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

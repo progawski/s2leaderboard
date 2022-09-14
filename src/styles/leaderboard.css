@@ -6,17 +6,16 @@
     width: 810px;
     padding: 20px;
     flex-grow: 1;
-    flex-shrink: 2;
 }
 
 #leaderboard {
     display: block;
     width: 100%;
+    min-width: 560px;
     color: #fff;
     font-family: 'Bakbak One Regular';
     height: 536px;
     text-align: center;
-    
 }
 
 .leaderboard-header{
@@ -83,6 +82,7 @@
 @media screen and (max-width: 1199.98px){
     #leaderboard{
         font-size: 15px;
+        min-width: auto;
     }
 }
 

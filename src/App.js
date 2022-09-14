@@ -1,3 +1,4 @@
+import { set } from 'lodash';
 import React, {useState, useEffect} from 'react';
 import Leaderboard from './components/Leaderboard';
 import Player from './components/Player';
@@ -51,32 +52,39 @@ export default function App() {
     }, [])
 
     // Get alpha player's data from Leaderboard in order to pass it to the Player component
-    const getAlphaPlayerData = (data) => {
+    const getAlphaPlayerData = (data) => { 
         setAlphaPlayerData(data);
-        setPlayersContainerVisible(true);
+        setPlayersContainerVisible(true);    
     }
 
     // Get bravo player's data from Leaderboard in order to pass it to the Player component
     const getBravoPlayerData = (data) => {
         setBravoPlayerData(data);
     }
-
-    mediaQuerySmall.addEventListener('change', (e) => {
-      e.matches? setPlayersContainerVisible(false) : setPlayersContainerVisible(true);
-    });
     
     if(mediaQueryLarge.matches && bravoPlayerVisible){
         setBravoPlayerVisible(false);
     }
 
     mediaQueryLarge.addEventListener('change', (e) => {
-      e.matches? setBravoPlayerVisible(false) : setBravoPlayerVisible(true);
+        if(e.matches){
+            setBravoPlayerVisible(false);
+        } else {
+            setBravoPlayerVisible(true);
+        }
+    });
+
+    mediaQuerySmall.addEventListener('change', (e) => {
+      if(!e.matches){
+        setPlayersContainerVisible(true);
+      }
     });
 
     // Close modal on click anywhere
     document.addEventListener('click', () => {
-        if(playersContainerVisible && playersContainer.style.display === 'flex'){
-            setPlayersContainerVisible(false); 
+        if(mediaQuerySmall.matches && playersContainerVisible && playersContainer.style.display === 'flex'){
+            playersContainer.style.display = 'none';
+            setPlayersContainerVisible(false);
         }
     });
     
@@ -91,7 +99,7 @@ export default function App() {
                     <RankSelector/>
                 </header>
                 <main>
-                    <div className='players-container' style={{display: (playersContainerVisible || !mediaQuerySmall.matches)?  'flex' : 'none'}}>
+                    <div className='players-container' style={{display: playersContainerVisible? 'flex' : 'none'}}>
                         <Player playerData={alphaPlayerData} isAlpha={true}/>
                         {bravoPlayerVisible? <Player playerData={bravoPlayerData} isAlpha={false}/> : null}
                     </div>
