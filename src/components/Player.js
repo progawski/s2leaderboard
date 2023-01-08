@@ -26,8 +26,8 @@ export default function Player(props) {
 
     return(
         <div className='player-container'>
-            <div className='player-stats-name' style={{backgroundColor:  props.isAlpha? 'rgba(228, 11, 66, 0.5)' : 'rgba(39, 143, 207, 0.5)'}}>{playerData? playerData.displayName : ''}</div>
-            {!playerData? <Spinner/> : <img className='rank-img-big' src={`images/tiers/${playerData.playerStats.rating.tierNumber}.png`} alt='Rank icon'/>}
+            <div className='player-stats-name' style={{backgroundColor:  props.isAlpha? 'rgba(228, 11, 66, 0.5)' : 'rgba(39, 143, 207, 0.5)'}}><span>{playerData? playerData.displayName : ''}</span></div>
+            {(!playerData)? <Spinner/> : <img className='rank-img-big' src={`images/tiers/${playerData.playerStats.rating.tierNumber}.png`} alt='Rank icon'/>}
             <div className='player-stats-container'>
                 <PlayerStats image={'star-icon'} data={playerData? playerData.playerStats.rating.formattedTier : ''} />
                 <PlayerStats image={'gamepad-icon'} data={playerData? playerData.playerStats.totalGames : ''} />

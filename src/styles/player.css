@@ -14,11 +14,11 @@
     background-color: rgba(79, 103, 63, 0.85);
     color: #fff;
     padding: 20px;
-    max-width: 300px;
+    width: 250px;
     flex-grow: 1;
     flex-shrink: 1;
     flex-basis: 0;
-    min-width: 250px;
+
 }
 
 .player-container:first-child{
@@ -56,9 +56,17 @@
     border: 1px solid #000;
     align-self: stretch;
     background-color: #11201B;
-    text-overflow: ellipsis;
+
     text-align: center;
     padding: 15px;
+
+    min-width: 0;
+}
+
+.player-stats-name span{
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 .rank-img-big{

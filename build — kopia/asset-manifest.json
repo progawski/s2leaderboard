@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/leaderboard/static/css/main.b797837c.css",
+    "main.js": "/leaderboard/static/js/main.7cbfb8ca.js",
+    "static/media/ctf_laos.png": "/leaderboard/static/media/ctf_laos.2307dc8c517263085d10.png",
+    "static/media/BakbakOneRegular.woff": "/leaderboard/static/media/BakbakOneRegular.0c2becc6a2b477c06f5e.woff",
+    "static/media/Montserrat.woff": "/leaderboard/static/media/Montserrat.7710fcbaccd9837e1c5e.woff",
+    "static/media/EqualizeRegular.woff": "/leaderboard/static/media/EqualizeRegular.e8f5d10bc158ae8716cc.woff",
+    "index.html": "/leaderboard/index.html",
+    "main.b797837c.css.map": "/leaderboard/static/css/main.b797837c.css.map",
+    "main.7cbfb8ca.js.map": "/leaderboard/static/js/main.7cbfb8ca.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.b797837c.css",
+    "static/js/main.7cbfb8ca.js"
+  ]
+}

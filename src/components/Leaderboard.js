@@ -9,6 +9,8 @@ export default function Leaderboard(props) {
     const data = props.data; // Data with all players' stats
     const getAlphaPlayerData = props.getAlphaPlayerData; // Access to the function from the parent component in order to pass data to the Player component
     const getBravoPlayerData = props.getBravoPlayerData;
+    const resetLeaderboard = props.resetLeaderboard;
+
 
     // Media queries
     const mediaQueryLarge = window.matchMedia('(max-width: 1198.98px)');
@@ -32,8 +34,14 @@ export default function Leaderboard(props) {
     }, [data])
 
     useEffect(() => {
-        getAlphaPlayerData(alphaPlayerData); // Execture parent's function every time the alpha player is changed
+        getAlphaPlayerData(alphaPlayerData); // Execute parent's function every time the alpha player is changed
     }, [alphaPlayerData])
+    
+    useEffect(() => {
+        setSortedList(null);
+        setAlphaPlayerData(null);
+        setBravoPlayerData(null);
+    }, [resetLeaderboard])
 
     useEffect(() => {
         getBravoPlayerData(bravoPlayerData); // Execture parent's function every time the bravo player is changed
@@ -119,6 +127,7 @@ export default function Leaderboard(props) {
     // Show spinner while data loading
     const noRowsRenderer = () => {
         return(
+            sortedList? <div className='spinner-container'>No data to display</div>:
             <Spinner />
         )
     }
